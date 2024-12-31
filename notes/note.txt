@@ -1,0 +1,102 @@
+Chapters ---> Categories ---> Topics ---> Questions
+Ibadat          Namaz          Farz        what about...
+Ibadat          roza           Farz        what about...
+Ibadat          zakat          Farz        what about...
+
+
+Chapters ---> Categories  ---> Questions
+Miras ---> 
+
+
+
+Chapters ---> Categories  ---> Questions
+Miras ---> 
+
+
+Routes:
+/fatawajat/
+/fatawajat/chapter/
+/fatawajat/chapter/category/
+/fatawajat/chapter/category/topic/question
+
+Example:
+/fatawajat/ibadaat/namaz/farz-namaz/what-about-farz-namaz-in-islam
+
+Components to run on Route:
+/fatawajat/
+ 1. <ChaptersList /> === show all chapters in cards grid 
+Ex: 
+    /fatawajat
+
+/fatawajat/chapter/
+ 2. <CategoriesList /> === show all Categories in current chapter in cards grid 
+Ex:
+    /fatawajat/ibadaat
+
+/fatawajat/chapter/category/
+ 3. <TopicsList /> === show all Topics in current category in cards grid 
+Ex:
+    /fatawajat/ibadaat/namaz
+
+/fatawajat/chapter/category/topic/
+ 4. <QuestionsList /> === show all Questions in current category in accordion list 
+Ex:
+    /fatawajat/ibadaat/namaz/farz-namaz
+
+/fatawajat/chapter/category/topic/question
+ 4. <Question /> === show Current Question in current topic in full page view.
+Ex:
+    /fatawajat/ibadaat/namaz/farz-namaz/what-about-farz-namaz-in-islam
+
+
+NOTE:
+    Here i think it little bit complex but interesting routing. How to implement this in react router v7.
+    While i am using vite.js. You can also share more best practice or accept it if my thinking is correct.
+    So, your work is, please tell how to perform this in my app. 
+
+
+
+    اسلام علیکم!
+    الحمد اللہ!
+    ایڈمن پینل کا ڈھانچہ کافی حد تک مکمل ہو گیا ہے۔
+    کچھ خوبصورتی کےلیے سٹائیلنگ باقی ہے۔
+    آپ کو چیک کرواتا ہوں۔
+
+
+
+
+
+
+chapter === کتاب
+category === باب
+topic    === فصل
+Questions === سوال
+
+ibadaat ---> namaz --->  farz ---> 1st question
+ibadaat ---> namaz --->  sunat  ---> 1st question
+ibadaat ---> namaz --->  nafal ---> 1st question
+
+
+
+// How to fetch data from backend with low API Calls Lost
+
+
+Idea#1 :
+        Use Cookeis to store value of fetchType variable.
+Explanation:
+    on /fatawajat a GET request goes to backend and fetch all chapters data. Use Cookeis to store the value of variable fetchType = new | cache to determine should api call be gone to backend or not.
+
+    1. Set fetchType = new , a default valule. 
+    2. On page route /fatawajat visit, fetch data form backend and set fetchType = cache.
+    3. now if route switchs, the useEffect will have to check fetchType variable first. If it is new, then a new api call will goes else no api call will be gone... and this cache data will be used as backup.
+    (what happen if page refreshs?)
+    4. on create or update chapter or delete chapter, set Cookeis fetchType = new from backend or front end if api call for create / update / delete was successfull. in this way if route is revisited, the useEffect will first check fetchType, and this will be the new... and an api call for get all chapters will be made and fresh data will be on the webpage.
+    5. on create new chapter, on live view... set created chapter data (came form db on createChapter()) to state to show live udpates and same for delete.. i.e. remove from state on delete.
+
+
+Question:
+But where to store this cache data. inside local Storage or session Storage. But i think its too much low space.
+and similar to this, i have almost 4-5 dynamic routes. what for all these ? 
+.................
+I think there is another way to hande caching data which is more professional in market. 
+I think React Query.

@@ -1,4 +1,6 @@
 import React from 'react'
+import { Separator } from './ui/separator'
+import RichTextEditor from './RitchText/RichTextEditor'
 
 const IntroSection = () => {
   return (
@@ -92,6 +94,9 @@ const IntroSection = () => {
             </div>
           </div>
         </div>
+
+        <Separator />
+        <RichTextEditor />
       </div>
     </div>
   </section>
